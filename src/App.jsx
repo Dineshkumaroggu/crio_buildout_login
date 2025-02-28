@@ -6,7 +6,9 @@ function App() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleLogin = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault(); 
+
     if (!username || !password) {
       setMessage("Both fields are required");
       return;
@@ -23,25 +25,30 @@ function App() {
     <div className="login-container">
       <h2>Login Page</h2>
       {message && <p className={message === "Welcome, user!" ? "success" : "error"}>{message}</p>}
-      <div className="input-container">
-        <label>Username:</label>
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Enter username"
-        />
-      </div>
-      <div className="input-container">
-        <label>Password:</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Enter password"
-        />
-      </div>
-      <button onClick={handleLogin}>Submit</button>
+      
+      <form onSubmit={handleSubmit}> 
+        <div className="input-container">
+          <label>Username:</label>
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Enter username"
+          />
+        </div>
+        
+        <div className="input-container">
+          <label>Password:</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter password"
+          />
+        </div>
+
+        <button type="submit">Submit</button>
+      </form>
     </div>
   );
 }
